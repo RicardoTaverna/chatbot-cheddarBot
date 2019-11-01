@@ -1,3 +1,10 @@
+import nltk
+import numpy as np
+import random
+import string
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
 GREETING_INPUTS = ("hello", "hi", "greetings", "sup", "what's up","hey",)
 GREETING_RESPONSES = ["hi", "hey", "*nods*", "hi there", "hello", "I am glad! You are talking to me"]
 
@@ -7,13 +14,20 @@ def greeting(sentence):
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
 
+respostaPedido = ("yes", "yep", "y", "start", "let's go",)
+pedidoResposta = ["Whats size of your pizza?"]
 
-GREETING_INPUTS = ("", "hi", "greetings", "sup", "what's up","hey",)
-GREETING_RESPONSES = ["hi", "hey", "*nods*", "hi there", "hello", "I am glad! You are talking to me"]
 def start(setence):
 
-    for word in setence.split():
-        if word.lower() in 
+    for word in sentence.split():
+        if word.lower() in respostaPedido:
+            return choice(pedidoResposta)
+            
+greeting("user_response")
+start("user_response")
+
+
+
 
 
 
