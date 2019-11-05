@@ -17,11 +17,10 @@ def greeting(sentence):
 respostaPedido = ("yes", "yep", "y", "start", "let's go",)
 pedidoResposta = ["Whats size of your pizza?"]
 
-def start(setence):
-
+def start(sentence):
     for word in sentence.split():
         if word.lower() in respostaPedido:
-            return choice(pedidoResposta)
+            return random.choice(pedidoResposta)
             
 greeting("user_response")
 start("user_response")
