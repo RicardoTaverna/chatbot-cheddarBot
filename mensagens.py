@@ -14,17 +14,38 @@ def greeting(sentence):
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
 
-respostaPedido = ("yes", "yep", "y", "start", "let's go",)
-pedidoResposta = ["Whats size of your pizza?"]
+respostaPedido = ("yes", "yep", "y", "start", "let's go",) #Reposta Usuario
+pedidoResposta = ["Whats size of your pizza? (Small, Medium, Big)"]     #Resposta Bot
 
 def start(sentence):
     for word in sentence.split():
         if word.lower() in respostaPedido:
             return random.choice(pedidoResposta)
-            
-greeting("user_response")
-start("user_response")
 
+respostaTamanho = ("small", "medium", "big",) #Reposta Usuario
+tamanhoResposta = ["I would like Stuffed Crust? Cheedar, Catupiry, No"]     #Resposta Bot
+
+def tamanho(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaTamanho:
+            return random.choice(tamanhoResposta)
+            
+
+respostaSabor = ("cheedar", "catupiry", "no",) #Reposta Usuario
+saborResposta = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
+
+def sabor(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaSabor:
+            return random.choice(saborResposta)
+respostaSabor = ("cheedar", "catupiry", "no",) #Reposta Usuario
+saborResposta = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
+
+def sabor(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaSabor:
+            return random.choice(saborResposta)
+            
 
 
 
