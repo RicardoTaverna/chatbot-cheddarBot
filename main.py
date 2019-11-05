@@ -6,11 +6,10 @@ import nltk
 import numpy as np
 import random
 import string
-import mensagens
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-arquivo = open('C:\\Users\\taver\\Desktop\\Projetos\\Interpretadores\\ProjetoII\\chatbot.txt', 'r', errors = 'ignore')
+arquivo = open('C:\\Users\\taver\\Desktop\\Projetos\\chatbot-cheddarBot\\chatbot.txt', 'r', errors = 'ignore')
 
 leitura = arquivo.read()
 leitura = leitura.lower()
@@ -52,6 +51,51 @@ def resposta(user_response):
 flag=True
 
 
+
+GREETING_INPUTS = ("hello", "hi", "greetings", "sup", "what's up","hey",)
+GREETING_RESPONSES = ["hi", "hey", "*nods*", "hi there", "hello", "I am glad! You are talking to me"]
+
+def greeting(sentence):
+ 
+    for word in sentence.split():
+        if word.lower() in GREETING_INPUTS:
+            return random.choice(GREETING_RESPONSES)
+
+respostaPedido = ("yes", "yep", "y", "start", "let's go",)
+pedidoResposta = ["Whats size of your pizza?"]
+
+def start(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaPedido:
+            return random.choice(pedidoResposta)
+            
+
+respostaTamanho = ("small", "medium", "big",) #Reposta Usuario
+tamanhoResposta = ["I would like Stuffed Crust? Cheedar, Catupiry, No"]     #Resposta Bot
+
+def tamanho(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaTamanho:
+            return random.choice(tamanhoResposta)
+            
+
+respostaSabor = ("cheedar", "catupiry", "no",) #Reposta Usuario
+saborResposta = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
+
+def sabor(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaSabor:
+            return random.choice(saborResposta)
+respostaSabor = ("cheedar", "catupiry", "no",) #Reposta Usuario
+saborResposta = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
+
+def sabor(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaSabor:
+            return random.choice(saborResposta)
+    
+
+
 print("CHEEDARBOT: My name is CheedarBot. I'm here to guide you for you buying your pizza. If you want to exit, type Bye!")
 while(flag==True):
     resposta_usuario = input()
@@ -61,8 +105,12 @@ while(flag==True):
             flag=False
             print("CHEEDARBOT: You are welcome..")
         else:
-            if(mensagens.greeting(resposta_usuario)!=None):
-                print("CHEEDARBOT: "+mensagens.saldacao(resposta_usuario))
+            if(greeting(resposta_usuario)!=None):
+                print("CHEEDARBOT: "+greeting(resposta_usuario))
+            elif(start(resposta_usuario)!=None):
+                print("CHEEDARBOT: " +start(resposta_usuario))
+            elif(tamanho(resposta_usuario)!=None):
+                print("CHEEDARBOT: " +tamanho(resposta_usuario))
             else:
                 print("CHEEDARBOT: ",end="")
                 print(resposta(resposta_usuario))
