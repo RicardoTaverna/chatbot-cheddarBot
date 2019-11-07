@@ -11,6 +11,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 arquivo = open('C:\\Users\\taver\\Desktop\\Projetos\\chatbot-cheddarBot\\chatbot.txt', 'r', errors = 'ignore')
 
+
 leitura = arquivo.read()
 leitura = leitura.lower()
 
@@ -19,9 +20,6 @@ nltk.download('wordnet')
 
 sent_tokens = nltk.sent_tokenize(leitura)
 word_tokens = nltk.word_tokenize(leitura)
-
-#importar mensagens.py
-
 lemmer = nltk.stem.WordNetLemmatizer()
 
 def LemTokens(tokens):
@@ -96,7 +94,7 @@ def sabor(sentence):
             return random.choice(saborResposta)
 
 respostaRetirar = ("yes", "yep", "y", "start", "let's go",) #Reposta Usuario
-retirarResposta = ["Valor da Entrega? "]     #Resposta Bot
+retirarResposta = ["Type your Address, first yout street (Initialize with street)"]     #Resposta Bot
 
 def retirar(sentence):
     for word in sentence.split():
@@ -104,9 +102,19 @@ def retirar(sentence):
             return random.choice(retirarResposta)
 
     
+respostaEntrega = ("no", "n", "nop", "none",)
+entregaResposta = ["Type your Address, first yout street"]
 
+def entrega(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaEntrega:
+            return random.choice(entregaResposta)
 
-print("CHEEDARBOT: My name is CheedarBot. I'm here to guide you for you buying your pizza. If you want to exit, type Bye!")
+respostaNumero = ("street")
+
+print("CHEEDARBOT: My name is CheedarBot. I'm here to guide you for you buying your pizza. If you want to exit, type Bye! If you want to start, type start")
+
+counter = 0
 while(flag==True):
     resposta_usuario = input()
     resposta_usuario=resposta_usuario.lower()
@@ -114,22 +122,26 @@ while(flag==True):
         if(resposta_usuario=='thanks' or resposta_usuario=='thank you' ):
             flag=False
             print("CHEEDARBOT: You are welcome..")
-        elif(greeting(resposta_usuario)!=None):
-            print("CHEEDARBOT: "+greeting(resposta_usuario))
-        elif(start(resposta_usuario)!=None):
+        elif((start(resposta_usuario)!=None) and counter == 0):
             print("CHEEDARBOT: " +start(resposta_usuario))
-        elif(tamanho(resposta_usuario)!=None):
+            counter = counter + 1
+        elif((tamanho(resposta_usuario)!=None) and counter == 1):
             print("CHEEDARBOT: " +tamanho(resposta_usuario))
-        elif(saborBorda(resposta_usuario)!=None):
+            counter = counter + 1
+        elif((saborBorda(resposta_usuario)!=None) and counter == 2):
             print("CHEEDARBOT: " +saborBorda(resposta_usuario))
-        elif(sabor(resposta_usuario)!= None):
+            counter += 1
+        elif((sabor(resposta_usuario)!= None) and counter == 3):
             print("CHEEDARBOT: " +sabor(resposta_usuario))
-        elif(retirar(resposta_usuario)!= None):
+            counter += 1
+        elif((retirar(resposta_usuario)!= None)  and counter == 4):
             print("CHEEDARBOT: " +retirar(resposta_usuario))
+            counter += 1
         else:
             print("CHEEDARBOT: ",end="")
             print(resposta(resposta_usuario))
             sent_tokens.remove(resposta_usuario)
+
     else:
         flag=False
         print("CHEEDARBOT: Bye! take care..")
