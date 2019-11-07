@@ -31,20 +31,28 @@ def tamanho(sentence):
             return random.choice(tamanhoResposta)
             
 
-respostaSabor = ("cheedar", "catupiry", "no",) #Reposta Usuario
-saborResposta = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
+respostaSaborBorda = ("cheedar", "catupiry", "no",) #Reposta Usuario
+saborRespostaBorda = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
+
+def saborBorda(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaSaborBorda:
+            return random.choice(saborRespostaBorda)
+respostaSabor = ("cheese", "pepperoni", "chicken",) #Reposta Usuario
+saborResposta = ["Do you want to withdraw ah the counter? "]     #Resposta Bot
 
 def sabor(sentence):
     for word in sentence.split():
         if word.lower() in respostaSabor:
             return random.choice(saborResposta)
-respostaSabor = ("cheedar", "catupiry", "no",) #Reposta Usuario
-saborResposta = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
 
-def sabor(sentence):
+respostaRetirar = ("yes", "yep", "y", "start", "let's go",) #Reposta Usuario
+retirarResposta = ["Valor da Entrega? "]     #Resposta Bot
+
+def retirar(sentence):
     for word in sentence.split():
-        if word.lower() in respostaSabor:
-            return random.choice(saborResposta)
+        if word.lower() in respostaRetirar:
+            return random.choice(retirarResposta)
             
 
 
