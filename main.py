@@ -61,8 +61,8 @@ def greeting(sentence):
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
 
-respostaPedido = ("yes", "yep", "y", "start", "let's go",)
-pedidoResposta = ["Whats size of your pizza?"]
+respostaPedido = ("yes", "yep", "y", "start", "let's go",) #Reposta Usuario
+pedidoResposta = ["Whats size of your pizza?"] #Resposta Bot
 
 def start(sentence):
     for word in sentence.split():
@@ -79,20 +79,30 @@ def tamanho(sentence):
             return random.choice(tamanhoResposta)
             
 
-respostaSabor = ("cheedar", "catupiry", "no",) #Reposta Usuario
-saborResposta = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
+respostaSaborBorda = ("cheedar", "catupiry", "no",) #Reposta Usuario
+saborRespostaBorda = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
+
+def saborBorda(sentence):
+    for word in sentence.split():
+        if word.lower() in respostaSaborBorda:
+            return random.choice(saborRespostaBorda)
+
+respostaSabor = ("cheese", "pepperoni", "chicken",) #Reposta Usuario
+saborResposta = ["Do you want to withdraw ah the counter? "]     #Resposta Bot
 
 def sabor(sentence):
     for word in sentence.split():
         if word.lower() in respostaSabor:
             return random.choice(saborResposta)
-respostaSabor = ("cheedar", "catupiry", "no",) #Reposta Usuario
-saborResposta = ["What flavor does your pizza have? \nCheese,\nPepperoni,\nChicken"]     #Resposta Bot
 
-def sabor(sentence):
+respostaRetirar = ("yes", "yep", "y", "start", "let's go",) #Reposta Usuario
+retirarResposta = ["Valor da Entrega? "]     #Resposta Bot
+
+def retirar(sentence):
     for word in sentence.split():
-        if word.lower() in respostaSabor:
-            return random.choice(saborResposta)
+        if word.lower() in respostaRetirar:
+            return random.choice(retirarResposta)
+
     
 
 
@@ -104,17 +114,22 @@ while(flag==True):
         if(resposta_usuario=='thanks' or resposta_usuario=='thank you' ):
             flag=False
             print("CHEEDARBOT: You are welcome..")
+        elif(greeting(resposta_usuario)!=None):
+            print("CHEEDARBOT: "+greeting(resposta_usuario))
+        elif(start(resposta_usuario)!=None):
+            print("CHEEDARBOT: " +start(resposta_usuario))
+        elif(tamanho(resposta_usuario)!=None):
+            print("CHEEDARBOT: " +tamanho(resposta_usuario))
+        elif(saborBorda(resposta_usuario)!=None):
+            print("CHEEDARBOT: " +saborBorda(resposta_usuario))
+        elif(sabor(resposta_usuario)!= None):
+            print("CHEEDARBOT: " +sabor(resposta_usuario))
+        elif(retirar(resposta_usuario)!= None):
+            print("CHEEDARBOT: " +retirar(resposta_usuario))
         else:
-            if(greeting(resposta_usuario)!=None):
-                print("CHEEDARBOT: "+greeting(resposta_usuario))
-            elif(start(resposta_usuario)!=None):
-                print("CHEEDARBOT: " +start(resposta_usuario))
-            elif(tamanho(resposta_usuario)!=None):
-                print("CHEEDARBOT: " +tamanho(resposta_usuario))
-            else:
-                print("CHEEDARBOT: ",end="")
-                print(resposta(resposta_usuario))
-                sent_tokens.remove(resposta_usuario)
+            print("CHEEDARBOT: ",end="")
+            print(resposta(resposta_usuario))
+            sent_tokens.remove(resposta_usuario)
     else:
         flag=False
         print("CHEEDARBOT: Bye! take care..")
