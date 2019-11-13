@@ -22,6 +22,7 @@ sent_tokens = nltk.sent_tokenize(leitura)
 word_tokens = nltk.word_tokenize(leitura)
 lemmer = nltk.stem.WordNetLemmatizer()
 
+# remove pontuação
 def LemTokens(tokens):
     return [lemmer.lemmatize(token) for token in tokens]
 remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
@@ -48,7 +49,14 @@ def resposta(user_response):
 
 flag=True
 
-
+def form():
+    adress = input('CHEEDARBOT: Your Adress')
+    number = input('CHEEDARBOT: the number of your house')
+    phone = input('CHEEDARBOT: your phone number')
+    rand = random.randint(10, 99)
+    pedido = '#1000'+ str(rand)
+    formulario = {'adress': adress, 'number': number, 'phone':phone, 'ticket': pedido}
+    return pedido
 
 GREETING_INPUTS = ("hello", "hi", "greetings", "sup", "what's up","hey",)
 GREETING_RESPONSES = ["hi", "hey", "*nods*", "hi there", "hello", "I am glad! You are talking to me"]
@@ -96,16 +104,17 @@ def sabor(sentence):
 respostaRetirar = ("yes", "yep", "y", "start", "let's go",) #Reposta Usuario
 retirarResposta = ["Type your Address, first yout street (Initialize with street)"]     #Resposta Bot
 
-def retirar(sentence):
+def entrega(sentence):
     for word in sentence.split():
         if word.lower() in respostaRetirar:
             return random.choice(retirarResposta)
 
-    
-respostaEntrega = ("no", "n", "nop", "none",)
-entregaResposta = ["Type your Address, first yout street"]
 
-def entrega(sentence):
+ticket = '#1000'+ str(random.randint(10, 99))    
+respostaEntrega = ("no", "n", "nop", "none",)
+entregaResposta = ["Ok, your ticket number is " + ticket]
+
+def retirar(sentence):
     for word in sentence.split():
         if word.lower() in respostaEntrega:
             return random.choice(entregaResposta)
@@ -116,7 +125,7 @@ print("CHEEDARBOT: My name is CheedarBot. I'm here to guide you for you buying y
 
 counter = 0
 while(flag==True):
-    resposta_usuario = input()
+    resposta_usuario = input('USER: ')
     resposta_usuario=resposta_usuario.lower()
     if(resposta_usuario!='bye'):
         if(resposta_usuario=='thanks' or resposta_usuario=='thank you' ):
@@ -131,12 +140,19 @@ while(flag==True):
         elif((saborBorda(resposta_usuario)!=None) and counter == 2):
             print("CHEEDARBOT: " +saborBorda(resposta_usuario))
             counter += 1
+
+        # Empaquei    
         elif((sabor(resposta_usuario)!= None) and counter == 3):
             print("CHEEDARBOT: " +sabor(resposta_usuario))
             counter += 1
-        elif((retirar(resposta_usuario)!= None)  and counter == 4):
-            print("CHEEDARBOT: " +retirar(resposta_usuario))
-            counter += 1
+            #aqui
+            if((retirar(resposta_usuario)!= None)  and counter == 4):
+                print("CHEEDARBOT: " +entrega(resposta_usuario))
+                ticket = form()
+                print('CHEEDARBOT: your ticket is {}'.format(ticket.get(3)))
+                counter += 1
+            elif((retirar(resposta_usuario)!= None)  and counter == 4):
+                print("CHEEDARBOT: " +retirar(resposta_usuario))
         else:
             print("CHEEDARBOT: ",end="")
             print(resposta(resposta_usuario))
