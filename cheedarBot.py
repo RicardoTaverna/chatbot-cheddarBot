@@ -77,7 +77,7 @@ def start(sentence):
             
 
 respostaTamanho = ("small", "medium", "big",) #Reposta Usuario
-tamanhoResposta = ["I would like Stuffed Crust? Cheedar, Catupiry, No"]     #Resposta Bot
+tamanhoResposta = ["Would you like Stuffed Crust? Cheedar, Catupiry, No"]     #Resposta Bot
 
 def tamanho(sentence):
     for word in sentence.split():
@@ -101,23 +101,24 @@ def sabor(sentence):
         if word.lower() in respostaSabor:
             return random.choice(saborResposta)
 
-respostaRetirar = ("yes", "yep", "y", "start", "let's go",) #Reposta Usuario
-retirarResposta = ["Type your Address, first yout street (Initialize with street)"]     #Resposta Bot
+respostaEntrega = ("yes", "yep", "y", "start", "let's go",) #Reposta Usuario
+entregaResposta = ["Type your Address, first yout street (Initialize with street)"]     #Resposta Bot
 
 def entrega(sentence):
     for word in sentence.split():
-        if word.lower() in respostaRetirar:
-            return random.choice(retirarResposta)
+        if word.lower() in respostaEntrega:
+            return random.choice(entregaResposta)
 
 
 ticket = '#1000'+ str(random.randint(10, 99))    
-respostaEntrega = ("no", "n", "nop", "none",)
-entregaResposta = ["Ok, your ticket number is " + ticket]
+
+respostaRetirar = ("no", "n", "nop", "none",)
+retirarResposta = ["Ok, your ticket number is " + ticket]
 
 def retirar(sentence):
     for word in sentence.split():
-        if word.lower() in respostaEntrega:
-            return random.choice(entregaResposta)
+        if word.lower() in respostaRetirar:
+            return random.choice(retirarResposta)
 
 respostaNumero = ("street")
 
@@ -146,13 +147,13 @@ while(flag==True):
             print("CHEEDARBOT: " +sabor(resposta_usuario))
             counter += 1
             #aqui
-            if((retirar(resposta_usuario)!= None)  and counter == 4):
-                print("CHEEDARBOT: " +entrega(resposta_usuario))
-                ticket = form()
-                print('CHEEDARBOT: your ticket is {}'.format(ticket.get(3)))
-                counter += 1
-            elif((retirar(resposta_usuario)!= None)  and counter == 4):
-                print("CHEEDARBOT: " +retirar(resposta_usuario))
+        elif((entrega(resposta_usuario)!= None)  and counter == 4):
+            print("CHEEDARBOT: " +entrega(resposta_usuario))
+            ticket = form()
+            print('CHEEDARBOT: your ticket is {}'.format(ticket))
+            
+        elif((retirar(resposta_usuario)!= None)  and counter == 4):
+            print("CHEEDARBOT: " +retirar(resposta_usuario))
         else:
             print("CHEEDARBOT: ",end="")
             print(resposta(resposta_usuario))
